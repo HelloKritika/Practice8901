@@ -37,7 +37,9 @@ jobs:
 
       - name: Build and Push Docker Images
         run: |
+          owner=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          repo_name=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
           docker build -t ${{ matrix.name }}:latest ${{ matrix.context }}
-          docker tag ${{ matrix.name }}:latest ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}/${{ matrix.name }}:latest
-          docker push ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}/${{ matrix.name }}:latest
+          docker tag ${{ matrix.name }}:latest ghcr.io/$owner/$repo_name/${{ matrix.name }}:latest
+          docker push ghcr.io/$owner/$repo_name/${{ matrix.name }}:latest
           
