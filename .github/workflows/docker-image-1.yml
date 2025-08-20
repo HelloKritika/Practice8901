@@ -26,11 +26,6 @@ jobs:
 
       - name: Build and Push Docker Images (tagged :latest)
         run: |
-            if git diff --quiet HEAD^ HEAD -- "$context_dir"; then
-            echo "⏩ No changes in $context_dir — skipping build."
-            continue
-            fi
-            
             echo "🔍 Finding Dockerfiles..."
             find . -type f -name 'Dockerfile' | while read dockerfile; do
             context_dir=$(dirname "$dockerfile")
@@ -45,4 +40,4 @@ jobs:
 
             echo "🚀 Pushing $image"
             docker push "$image"
-          done
+            done
