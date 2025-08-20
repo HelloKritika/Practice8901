@@ -6,6 +6,12 @@ on:
       - main  # Adjust as needed
 
 jobs:
+   check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Practice
+        run: |
+            echo "Found Found"
    build:
     runs-on: ubuntu-latest
     strategy:
