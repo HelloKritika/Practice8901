@@ -6,14 +6,20 @@ on:
       - main  # Adjust as needed
 
 jobs:
+   set-up:
+     runs-on: ubuntu-latest
+     steps:
+       - uses: actions/checkout@v4
    check:
     runs-on: ubuntu-latest
+    needs: set-up
     steps:
       - name: Practice
         run: |
             echo "Found Found"
    build:
     runs-on: ubuntu-latest
+    needs: set-up
     strategy:
       matrix:
         include:
@@ -33,11 +39,11 @@ jobs:
       packages: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Docker login
-        run: echo "${{ secrets.GITHUBTOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+        
+        run: |
+             echo "::add-mask::${{ secrets.GITHUB_TOKEN }}"
+             echo "${{ secrets.GITHUBTOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
 
       - name: Build and Push Docker Images
         run: |
