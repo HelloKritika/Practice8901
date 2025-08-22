@@ -20,19 +20,7 @@ jobs:
    build:
     runs-on: ubuntu-latest
     needs: set-up
-    strategy:
-      matrix:
-        include:
-          - name: service-a
-            context: ./multi-docker-project/service-a
-          - name: service-b
-            context: ./multi-docker-project/service-b
-          - name: sub-profile-b1
-            context: multi-docker-project/service-b/sub-profile-b1
-          - name: service-c
-            context: ./multi-docker-project/service-c
-          - name: service-d
-            context: ./multi-docker-project
+    
 
     permissions:
       contents: read
