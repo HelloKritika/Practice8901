@@ -25,6 +25,8 @@ jobs:
             context: multi-docker-project/service-b/sub-profile-b1
           - name: service-c
             context: ./multi-docker-project/service-c
+          - name: service-d
+            context: ./multi-docker-project
 
     permissions:
       contents: read
