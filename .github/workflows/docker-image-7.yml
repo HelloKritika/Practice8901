@@ -49,7 +49,12 @@ jobs:
         run: |
           owner=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
           repo_name=$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')
-          docker build -t ${{ matrix.name }}:latest ${{ matrix.context }}
-          docker tag ${{ matrix.name }}:latest ghcr.io/$owner/$repo_name/${{ matrix.name }}:latest
-          docker push ghcr.io/$owner/$repo_name/${{ matrix.name }}:latest
+          docker build -t service-a:latest ./multi-docker-project/service-a
+          docker build -t service-b:latest ./multi-docker-project/service-b
+          docker tag service-a:latest ghcr.io/$owner/$repo_name/service-a:latest
+          docker tag service-b:latest ghcr.io/$owner/$repo_name/service-b:latest
+          docker push ghcr.io/$owner/$repo_name/service-a:latest
+          docker push ghcr.io/$owner/$repo_name/service-b:latest
+
+          
           
