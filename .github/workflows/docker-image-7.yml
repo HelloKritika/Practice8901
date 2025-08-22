@@ -39,7 +39,6 @@ jobs:
       - name: Docker login
         run: echo "${{ secrets.GITHUBTOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
 
-
       - name: Build and Push Docker Images
         run: |
           owner=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
